@@ -7,6 +7,7 @@
 ///******************************************************************************
 
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 class Movie
@@ -81,14 +82,8 @@ void output(Node * hd) {
 Node* addNodeToHead(Node * &hd)
 {
     //Declares and initilizes variables
-    double r;
+    double r = rand() % 5;
     string c;
-    //user input
-    cout << "Enter review rating 0-5: ";
-    cin >> r;
-    cout << "Enter review comments: ";
-    cin >> c;
-    cin.ignore();
     //adds new_node to the head of the list
     Node* new_node = new Node(r, c);
     new_node->next = hd;
