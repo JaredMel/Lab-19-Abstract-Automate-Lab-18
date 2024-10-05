@@ -7,31 +7,18 @@
 ///******************************************************************************
 
 #include <iostream>
-#include <time.h>
+#include <fstream>
 using namespace std;
 
 class Movie
 {
 private:
     string title;
-    //struct Node
-    struct Node {
-        //Declares attributes
-        double rating;
-        string comments;
-        Node *next;
-        //constructor
-        Node(double new_rating, string new_comments)
-        {
-            rating = new_rating;
-            comments = new_comments;
-            next = nullptr;
-        }
-};
+    Node * node;
 public:
+    //constructor
     
 };
-
 //struct Node
 struct Node {
     //Declares attributes
@@ -46,6 +33,7 @@ struct Node {
         next = nullptr;
     }
 };
+const int SIZE = 3;
 //Prototype functions
 void output(Node *);
 Node* addNodeToHead(Node *&);
@@ -82,11 +70,33 @@ void output(Node * hd) {
 Node* addNodeToHead(Node * &hd)
 {
     //Declares and initilizes variables
-    double r = rand() % 5;
+    double r;
     string c;
-    //adds new_node to the head of the list
-    Node* new_node = new Node(r, c);
-    new_node->next = hd;
+    ifstream ifs;
+    Node* new_node;
+    //opens files
+    ifs.open("data.txt");
+    //check if file was found
+    if (ifs)
+    {
+        //reads the values in the file
+        for (size_t i = 0; i < SIZE; i++)
+        {
+            //sets each value to a temp variable
+            r = rand() % 5;
+            getline(ifs,c);
+            //adds new_node to the head of the list
+            new_node = new Node(r, c);
+            new_node->next = hd;
+        }
+        ifs.close();
+    }
+    else
+    {
+        //prints and exits cause the file wasn't found
+        cout << "Error opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
 
     return new_node;
 }
