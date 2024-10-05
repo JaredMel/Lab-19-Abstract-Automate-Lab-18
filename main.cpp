@@ -1,9 +1,9 @@
 ///******************************************************************************
-//Description: This program will 
+//Description: This program will show movie reviews
 //Author: Jared Melendez
 //COMSC 210 Section 5293
 //Date: October 4, 2024
-//Status: WIP
+//Status: Done
 ///******************************************************************************
 
 #include <iostream>
@@ -107,12 +107,13 @@ Node* addNodeToHead(Node * &hd, int count)
         //reads the values in the file
         for (size_t i = 0; i < SIZE; i++)
         {
-            r = rand() % 5;
+            r = rand() % 50;
+            r = (double) r / 10;
             for (size_t i = 0; i < count; i++)
             {
                 for (size_t j = 0; j < 3; j++)
                 {
-                    ifs.ignore(1000);
+                    ifs.ignore(1000, '\n');
                 }
             }
             getline(ifs,c);
