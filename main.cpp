@@ -18,7 +18,7 @@ private:
     Node * node;
 public:
     //constructor
-    //Movie(string t, Node * n) {title = t; node = n;}
+    Movie(string t) {title = t; node = nullptr;}
     //getters and setters
     string getTitle() {return title;}
     Node * getNode() {return node;}
@@ -53,7 +53,21 @@ Node* addNodeToHead(Node *&);
 int main() {
     //Declares and initilizes variables
     vector<Movie> movies;
-    Movie movie1, movie2, movie3, movie4;
+    Movie movie1("Movie 1"), movie2("Movie 2"), movie3("Movie 3"), movie4("Movie 4");
+    Node * temp = movie1.getNode();
+
+    movie1.setNode(addNodeToHead(temp));
+    temp = movie2.getNode();
+    movie2.setNode(addNodeToHead(temp));
+    temp = movie3.getNode();
+    movie3.setNode(addNodeToHead(temp));
+    temp = movie4.getNode();
+    movie4.setNode(addNodeToHead(temp));
+
+    movies.push_back(movie1);
+    movies.push_back(movie2);
+    movies.push_back(movie3);
+    movies.push_back(movie4);
 }
 //the output function
 void output(Node * hd) {
