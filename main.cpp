@@ -11,6 +11,23 @@
 #include <vector>
 using namespace std;
 
+//struct Node
+struct Node {
+    //Declares attributes
+    double rating;
+    string comments;
+    Node *next;
+    //constructor
+    Node(double new_rating, string new_comments)
+    {
+        rating = new_rating;
+        comments = new_comments;
+        next = nullptr;
+    }
+};
+//Prototype functions
+void output(Node *);
+Node* addNodeToHead(Node *&);
 class Movie
 {
 private:
@@ -31,24 +48,7 @@ public:
         output(node); //potential problem
     }
 };
-//struct Node
-struct Node {
-    //Declares attributes
-    double rating;
-    string comments;
-    Node *next;
-    //constructor
-    Node(double new_rating, string new_comments)
-    {
-        rating = new_rating;
-        comments = new_comments;
-        next = nullptr;
-    }
-};
 const int SIZE = 3;
-//Prototype functions
-void output(Node *);
-Node* addNodeToHead(Node *&);
 //the main function
 int main() {
     //Declares and initilizes variables
@@ -68,6 +68,12 @@ int main() {
     movies.push_back(movie2);
     movies.push_back(movie3);
     movies.push_back(movie4);
+
+    for (Movie movie : movies)
+    {
+        movie.print();
+        cout << endl;
+    }
 }
 //the output function
 void output(Node * hd) {
@@ -79,19 +85,13 @@ void output(Node * hd) {
     //Declares and initilizes variables
     int count = 1;
     Node * current = hd;
-    double sum = 0.0;
-    double average = 0.0;
     //Outputs list
     cout << "Outputting all reviews:" << endl;
     while (current) {
         cout << "   > Review #" << count << ": " << current->rating << ": " << current->comments << endl;
         count++;
-        sum += current->rating;
         current = current->next;
     }
-    //calculates average and outputs it
-    average = sum/count;
-    cout << "   > Average: " << average << endl;
 }
 //the addNodeToHead function
 Node* addNodeToHead(Node * &hd)
