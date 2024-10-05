@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 class Movie
@@ -17,7 +18,18 @@ private:
     Node * node;
 public:
     //constructor
-    
+    //Movie(string t, Node * n) {title = t; node = n;}
+    //getters and setters
+    string getTitle() {return title;}
+    Node * getNode() {return node;}
+    void setTitle(string t) {title = t;}
+    void setNode(Node * n) {node = n;}
+    //print method
+    void print()
+    {
+        cout << title << endl;
+        output(node); //potential problem
+    }
 };
 //struct Node
 struct Node {
@@ -40,7 +52,8 @@ Node* addNodeToHead(Node *&);
 //the main function
 int main() {
     //Declares and initilizes variables
-    
+    vector<Movie> movies;
+    Movie movie1, movie2, movie3, movie4;
 }
 //the output function
 void output(Node * hd) {
