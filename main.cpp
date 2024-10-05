@@ -17,17 +17,10 @@ struct Node {
     double rating;
     string comments;
     Node *next;
-    //constructor
-    Node(double new_rating, string new_comments)
-    {
-        rating = new_rating;
-        comments = new_comments;
-        next = nullptr;
-    }
 };
 //Prototype functions
 void output(Node *);
-Node* addNodeToHead(Node *&);
+Node* addNodeToHead(Node *&, int);
 class Movie
 {
 private:
@@ -55,14 +48,19 @@ int main() {
     vector<Movie> movies;
     Movie movie1("Movie 1"), movie2("Movie 2"), movie3("Movie 3"), movie4("Movie 4");
     Node * temp = movie1.getNode();
+    int count = 0;
 
-    movie1.setNode(addNodeToHead(temp));
+    movie1.setNode(addNodeToHead(temp, count));
+    count++;
     temp = movie2.getNode();
-    movie2.setNode(addNodeToHead(temp));
+    movie2.setNode(addNodeToHead(temp, count));
+    count++;
     temp = movie3.getNode();
-    movie3.setNode(addNodeToHead(temp));
+    movie3.setNode(addNodeToHead(temp, count));
+    count++;
     temp = movie4.getNode();
-    movie4.setNode(addNodeToHead(temp));
+    movie4.setNode(addNodeToHead(temp, count));
+    count++;
 
     movies.push_back(movie1);
     movies.push_back(movie2);
@@ -94,7 +92,7 @@ void output(Node * hd) {
     }
 }
 //the addNodeToHead function
-Node* addNodeToHead(Node * &hd)
+Node* addNodeToHead(Node * &hd, int count)
 {
     //Declares and initilizes variables
     double r;
@@ -109,12 +107,31 @@ Node* addNodeToHead(Node * &hd)
         //reads the values in the file
         for (size_t i = 0; i < SIZE; i++)
         {
-            //sets each value to a temp variable
             r = rand() % 5;
+            for (size_t i = 0; i < count; i++)
+            {
+                for (size_t j = 0; j < 3; j++)
+                {
+                    ifs.ignore(1000);
+                }
+            }
             getline(ifs,c);
-            //adds new_node to the head of the list
-            new_node = new Node(r, c);
-            new_node->next = hd;
+            new_node = new Node;
+
+            if(!hd)
+            {
+                hd = new_node;
+                new_node->next = nullptr;
+                new_node->rating = r;
+                new_node->comments = c;
+            }
+            else
+            {
+                new_node->next = hd;
+                new_node->rating = r;
+                new_node->comments = c;
+                hd = new_node;
+            }
         }
         ifs.close();
     }
@@ -125,5 +142,5 @@ Node* addNodeToHead(Node * &hd)
         exit(EXIT_FAILURE);
     }
 
-    return new_node;
+    return hd;
 }
